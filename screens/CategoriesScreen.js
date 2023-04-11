@@ -4,7 +4,7 @@ import { CATEGORIES } from "../data/dummy-data";
 
 export default function CategoriesScreen({ navigation }) {
   const navHandler = (id) =>
-    navigation.navigate("Meals Overview", { catID: id });
+    navigation.navigate("MealsOverview", { catID: id });
 
   return (
     <View style={styles.container}>
