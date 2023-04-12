@@ -1,14 +1,17 @@
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
-import React from "react";
 
-export default function MealItem({ data }) {
+export default function MealItem({ data, navigation }) {
+  const navigationHandler = () => {
+    navigation.navigate("MealsDetailsScreen", { data });
+  };
+
   return (
     <View style={style.container}>
       <Pressable
         style={({ pressed }) =>
           pressed ? [style.btn, style.pressed] : style.btn
         }
-        onPress={() => console.log(123)}
+        onPress={navigationHandler}
       >
         <View>
           <Image style={style.img} source={{ uri: data.imageUrl }} />

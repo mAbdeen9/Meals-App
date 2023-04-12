@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 import MealItem from "../components/MealItem";
 import { View, Text, StyleSheet } from "react-native";
 import { useRoute } from "@react-navigation/native";
@@ -17,12 +17,15 @@ export default function MealsOverviewScreen({ navigation }) {
   // before finishing the running Task inside it so we get a better user experience
   useLayoutEffect(() => {
     const headerName = CATEGORIES.find((e) => e.id == route.params.catID).title;
+    // SetOptions method to set dynamic title name for the screen component & more options . . .
     navigation.setOptions({
       title: headerName,
     });
   }, [route.params.catID]);
 
-  const renderMeal = (itemData) => <MealItem data={itemData.item} />;
+  const renderMeal = (itemData) => (
+    <MealItem data={itemData.item} navigation={navigation} />
+  );
 
   return (
     <View style={style.container}>
@@ -31,7 +34,6 @@ export default function MealsOverviewScreen({ navigation }) {
         keyExtractor={(i) => i.id}
         renderItem={renderMeal}
       />
-      <Text>Meals Overview Screen {route.params.catID} </Text>
     </View>
   );
 }
