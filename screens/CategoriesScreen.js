@@ -3,8 +3,10 @@ import Box from "../components/Box";
 import { CATEGORIES } from "../data/dummy-data";
 
 export default function CategoriesScreen({ navigation }) {
-  const navHandler = (id) =>
+  const navHandler = (id) => {
+    // You can pass a second parameter object with some meta data so you can access it from the navigated component by using the route argument
     navigation.navigate("MealsOverview", { catID: id });
+  };
 
   return (
     <View style={styles.container}>
