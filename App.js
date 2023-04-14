@@ -4,7 +4,7 @@ import CategoriesScreen from "./screens/CategoriesScreen";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import MealsDetailsScreen from "./screens/MealsDetailsScreen";
+import MealsDetailsScreen from "./screens/mealsDetailsScreen";
 
 const Stack = createNativeStackNavigator();
 

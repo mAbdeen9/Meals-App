@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 
 export default function MealItem({ data, navigation }) {
+  // you can use useNavigation Hook instead of passing navigation object throw components 💡
   const navigationHandler = () => {
     navigation.navigate("MealsDetailsScreen", { data });
   };
