@@ -1,12 +1,6 @@
 import { useLayoutEffect } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  ScrollView,
-  Button,
-} from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
+import IconButton from "../components/IconButton";
 
 export default function MealsDetailsScreen({ route, navigation }) {
   const {
@@ -19,16 +13,16 @@ export default function MealsDetailsScreen({ route, navigation }) {
     steps,
   } = route.params.data;
 
+  const addToFavoriteHandler = () => {
+    console.log("Star Handler");
+  };
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: title,
-      headerRight: () => (
-        <Button
-          onPress={() => alert("This is a button!")}
-          title="Info"
-          color="#fff"
-        />
-      ),
+      headerRight: () => {
+        return <IconButton onPress={addToFavoriteHandler} />;
+      },
     });
   }, [title]);
 
