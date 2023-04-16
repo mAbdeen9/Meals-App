@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 import MealItem from "../components/MealItem";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { CATEGORIES, MEALS } from "../data/dummy-data";
 import { FlatList } from "react-native";

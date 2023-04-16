@@ -1,8 +1,11 @@
-import { useLayoutEffect } from "react";
+import { useContext, useLayoutEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import IconButton from "../components/IconButton";
+import { FavoriteContext } from "../store/context/favorites";
 
 export default function MealsDetailsScreen({ route, navigation }) {
+  const favoriteIDs = useContext(FavoriteContext);
+
   const {
     title,
     imageUrl,
@@ -11,20 +14,30 @@ export default function MealsDetailsScreen({ route, navigation }) {
     affordability,
     ingredients,
     steps,
+    id,
   } = route.params.data;
 
   const addToFavoriteHandler = () => {
-    console.log("Star Handler");
+    if (favoriteIDs.ids.includes(id)) {
+      favoriteIDs.removeFavorite(id);
+    } else {
+      favoriteIDs.addFavorite(id);
+    }
   };
 
   useLayoutEffect(() => {
     navigation.setOptions({
       title: title,
       headerRight: () => {
-        return <IconButton onPress={addToFavoriteHandler} />;
+        return (
+          <IconButton
+            name={favoriteIDs.ids.includes(id) ? "star" : "star-outline"}
+            onPress={addToFavoriteHandler}
+          />
+        );
       },
     });
-  }, [title]);
+  }, [title, addToFavoriteHandler]);
 
   return (
     <ScrollView style={style.container}>
@@ -45,7 +58,7 @@ export default function MealsDetailsScreen({ route, navigation }) {
         ))}
         <Text style={style.title}>steps</Text>
         <View style={style.line}></View>
-        {steps.map((e, i) => (
+        {steps.map((e) => (
           <Text style={style.details} key={e}>
             {e}
           </Text>
