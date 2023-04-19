@@ -1,15 +1,17 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Platform, Text } from "react-native";
-import CategoriesScreen from "./screens/CategoriesScreen";
-import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import MealsDetailsScreen from "./screens/mealsDetailsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { Fontisto } from "@expo/vector-icons";
+import MealsDetailsScreen from "./screens/mealsDetailsScreen";
 import FavoriteContextProvider from "./store/context/favorites";
 import FavoriteScreen from "./screens/FavoriteScreen";
+import CategoriesScreen from "./screens/CategoriesScreen";
+import MealsOverviewScreen from "./screens/MealsOverviewScreen";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { store } from "./store/Redux/store";
+import { Provider } from "react-redux";
 
 const Tab = createBottomTabNavigator();
 
@@ -58,7 +60,8 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <FavoriteContextProvider>
+      {/* <FavoriteContextProvider> */}
+      <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
@@ -84,7 +87,8 @@ export default function App() {
             />
           </Stack.Navigator>
         </NavigationContainer>
-      </FavoriteContextProvider>
+      </Provider>
+      {/* </FavoriteContextProvider> */}
     </>
   );
 }

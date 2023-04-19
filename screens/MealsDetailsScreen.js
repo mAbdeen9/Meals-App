@@ -1,10 +1,14 @@
 import { useContext, useLayoutEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import IconButton from "../components/IconButton";
-import { FavoriteContext } from "../store/context/favorites";
-
+// import { FavoriteContext } from "../store/context/favorites";
+import { useDispatch, useSelector } from "react-redux";
+import { favoritesActions } from "../store/Redux/favSlice";
 export default function MealsDetailsScreen({ route, navigation }) {
-  const favoriteIDs = useContext(FavoriteContext);
+  // const favoriteIDs = useContext(FavoriteContext);
+
+  const favoriteIDs = useSelector((state) => state.favSlice);
+  const dispatch = useDispatch();
 
   const {
     title,
@@ -19,9 +23,11 @@ export default function MealsDetailsScreen({ route, navigation }) {
 
   const addToFavoriteHandler = () => {
     if (favoriteIDs.ids.includes(id)) {
-      favoriteIDs.removeFavorite(id);
+      // favoriteIDs.removeFavorite(id);
+      dispatch(favoritesActions.removeFromFav({ id: id }));
     } else {
-      favoriteIDs.addFavorite(id);
+      // favoriteIDs.addFavorite(id);
+      dispatch(favoritesActions.addToFav({ id: id }));
     }
   };
 
